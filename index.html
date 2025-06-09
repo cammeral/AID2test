@@ -1,55 +1,113 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>تسجيل الطالب</title>
   <style>
-    body { font-family: Arial; background: #f2f2f2; padding: 20px; }
-    .container { max-width: 400px; margin: auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px #ccc; }
-    input, select, button {
-      width: 100%; padding: 10px; margin: 10px 0; border-radius: 5px; border: 1px solid #ddd;
+    body {
+      font-family: 'Cairo', sans-serif;
+      background: #f0f2f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
     }
-    button { background: #28a745; color: white; font-weight: bold; border: none; cursor: pointer; }
+    .container {
+      background: white;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      width: 90%;
+      max-width: 400px;
+    }
+    h2 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 20px;
+    }
+    label {
+      display: block;
+      margin-top: 10px;
+      color: #444;
+    }
+    input, select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+    button {
+      width: 100%;
+      padding: 12px;
+      background: #28a745;
+      color: white;
+      border: none;
+      font-size: 18px;
+      border-radius: 8px;
+      margin-top: 20px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #218838;
+    }
+    #msg {
+      text-align: center;
+      margin-top: 15px;
+      color: #555;
+    }
   </style>
 </head>
 <body>
   <div class="container">
-    <h3>تسجيل الطالب</h3>
+    <h2>تسجيل الطالب</h2>
     <form id="studentForm">
-      <input type="text" name="name" placeholder="الاسم الثلاثي" required />
-      <input type="text" name="college" placeholder="الكلية / الجامعة" required />
+      <input type="hidden" name="user_id" id="user_id" />
+      <label>الاسم الثلاثي</label>
+      <input type="text" name="name" required />
+      
+      <label>الكلية / الجامعة</label>
+      <input type="text" name="college" required />
+      
+      <label>المرحلة الدراسية</label>
       <select name="level" required>
-        <option value="">اختر المرحلة</option>
-        <option>الأولى</option>
-        <option>الثانية</option>
-        <option>الثالثة</option>
-        <option>الرابعة</option>
+        <option value=\"الأولى\">الأولى</option>
+        <option value=\"الثانية\">الثانية</option>
+        <option value=\"الثالثة\">الثالثة</option>
+        <option value=\"الرابعة\">الرابعة</option>
       </select>
+      
+      <label>نوع الدراسة</label>
       <select name="study_type" required>
-        <option value="">نوع الدراسة</option>
-        <option>صباحية</option>
-        <option>مسائية</option>
+        <option value=\"صباحية\">صباحية</option>
+        <option value=\"مسائية\">مسائية</option>
       </select>
-      <button type="submit">تسجيل</button>
+      
+      <button type=\"submit\">تسجيل</button>
+      <div id=\"msg\"></div>
     </form>
-    <p id="msg"></p>
   </div>
 
   <script>
     const form = document.getElementById('studentForm');
     const msg = document.getElementById('msg');
+
+    const params = new URLSearchParams(window.location.search);
+    document.getElementById('user_id').value = params.get(\"user_id\") || \"\";
+
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       msg.textContent = 'جاري التسجيل...';
       const data = Object.fromEntries(new FormData(form));
-      const response = await fetch('https://script.google.com/macros/s/AKfycbylq5j8ZoPYYPb7S8zPz7sZx2c7aoH2EmDd2iyl3kPucQPyTQnJ9saT80q3NSOpZXT8/exec', {
+      const response = await fetch('https://script.google.com/macros/s/AKfycbzIXkOhDRE-VPmLPyN0MPj34RvaX--R7wW8EFI1bnb14chJfxIia154JnBxRkxpvvun/exec', {
         method: 'POST',
         body: new URLSearchParams(data),
       });
       const resText = await response.text();
-      msg.textContent = resText || 'تم التسجيل بنجاح';
+      msg.textContent = resText || '✅ تم التسجيل بنجاح';
     });
   </script>
 </body>
