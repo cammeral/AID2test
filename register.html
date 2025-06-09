@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">  <!-- ضمان التوافق مع الهواتف -->
+  <title>نموذج تسجيل الطالب</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    input, select, button { width: 100%; padding: 10px; margin: 5px 0; font-size: 16px; }
+  </style>
+</head>
+<body>
+  <h2>تسجيل طالب جديد</h2>
+  <form id="regForm">
+    <input type="text" name="fullName" placeholder="الاسم الثلاثي" required>
+    <input type="text" name="college" placeholder="اسم الكلية أو الجامعة" required>
+    <select name="level" required>
+      <option value="">اختر المرحلة الدراسية</option>
+      <option value="الأولى">الأولى</option>
+      <option value="الثانية">الثانية</option>
+      <option value="الثالثة">الثالثة</option>
+      <option value="الرابعة">الرابعة</option>
+    </select>
+    <select name="studyType" required>
+      <option value="">اختر نوع الدراسة</option>
+      <option value="صباحية">صباحية</option>
+      <option value="مسائية">مسائية</option>
+    </select>
+    <button type="button" onclick="submitForm()">تسجيل</button>
+  </form>
+
+  <script>
+    async function submitForm() {
+      const form = document.getElementById('regForm');
+      const formData = new FormData(form);
+      // عنوان Google Apps Script Web App (قم بتعديله بعنوان سكربتك)
+      const url = "https://script.google.com/macros/s/WEB_APP_ID/exec";
+      await fetch(url, {
+        method: 'POST',
+        body: new URLSearchParams(formData)
+      });
+      alert("تم التسجيل بنجاح!");
+      form.reset();
+    }
+  </script>
+</body>
+</html>
