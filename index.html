@@ -2,38 +2,94 @@
 <html lang="ar">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">  <!-- ضمان التوافق مع الهواتف -->
-  <title>نموذج تسجيل الطالب</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>تسجيل الطلاب</title>
   <style>
-    body { font-family: Arial, sans-serif; padding: 20px; }
-    input, select, button { width: 100%; padding: 10px; margin: 5px 0; font-size: 16px; }
+    body {
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(to bottom, #f0f4f8, #dfe9f3);
+      padding: 20px;
+      text-align: center;
+      direction: rtl;
+    }
+
+    .container {
+      background: white;
+      max-width: 400px;
+      margin: auto;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      color: #2b4f81;
+      margin-bottom: 5px;
+    }
+
+    h2 {
+      color: #4a4a4a;
+      margin-top: 0;
+      font-size: 18px;
+    }
+
+    input, select, button {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      box-sizing: border-box;
+    }
+
+    button {
+      background-color: #2b4f81;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #1f3e67;
+    }
   </style>
 </head>
 <body>
-  <h2>تسجيل طالب جديد</h2>
-  <form id="regForm">
-    <input type="text" name="fullName" placeholder="الاسم الثلاثي" required>
-    <input type="text" name="college" placeholder="اسم الكلية أو الجامعة" required>
-    <select name="level" required>
-      <option value="">اختر المرحلة الدراسية</option>
-      <option value="الأولى">الأولى</option>
-      <option value="الثانية">الثانية</option>
-      <option value="الثالثة">الثالثة</option>
-      <option value="الرابعة">الرابعة</option>
-    </select>
-    <select name="studyType" required>
-      <option value="">اختر نوع الدراسة</option>
-      <option value="صباحية">صباحية</option>
-      <option value="مسائية">مسائية</option>
-    </select>
-    <button type="button" onclick="submitForm()">تسجيل</button>
-  </form>
+
+  <div class="container">
+    <h1>الإسعافات الأولية</h1>
+    <h2>الدكتور حيدر هاشم</h2>
+    <h2>تسجيل الطلاب 2025</h2>
+
+    <form id="regForm">
+      <input type="text" name="fullName" placeholder="الاسم الثلاثي" required>
+      <input type="text" name="college" placeholder="اسم الكلية أو الجامعة" required>
+      
+      <select name="level" required>
+        <option value="">اختر المرحلة الدراسية</option>
+        <option value="الأولى">الأولى</option>
+        <option value="الثانية">الثانية</option>
+        <option value="الثالثة">الثالثة</option>
+        <option value="الرابعة">الرابعة</option>
+      </select>
+      
+      <select name="studyType" required>
+        <option value="">اختر نوع الدراسة</option>
+        <option value="صباحية">صباحية</option>
+        <option value="مسائية">مسائية</option>
+      </select>
+      
+      <button type="button" onclick="submitForm()">تسجيل</button>
+    </form>
+  </div>
 
   <script>
     async function submitForm() {
       const form = document.getElementById('regForm');
       const formData = new FormData(form);
-      // عنوان Google Apps Script Web App (قم بتعديله بعنوان سكربتك)
       const url = "https://script.google.com/macros/s/AKfycbzrhotI2WdsBznmxfLqXTXnDVW8obZluks5_HxQmzrQx-8G5UWWxmjDWdRdz7jck0X4/exec";
       await fetch(url, {
         method: 'POST',
@@ -43,5 +99,6 @@
       form.reset();
     }
   </script>
+
 </body>
 </html>
